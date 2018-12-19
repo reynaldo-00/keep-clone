@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
-import { authRegister } from '../../actions'
+import { GoogleLogin } from 'react-google-login';
 
+import { authRegister } from '../../actions'
 import Background from '../Background';
 import Navigation from '../Home/Navigation';
 
 import requireNotAuth from './requireNotAuth';
+
+const gId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
 class Register extends Component {
     constructor(props) {
@@ -27,6 +30,10 @@ class Register extends Component {
         e.preventDefault();
         const { name, value } = e.target;
         this.setState({[name]: value})
+    }
+
+    responseGoogle = (response) => {
+        console.log(response);
     }
 
     render() {
@@ -64,6 +71,13 @@ class Register extends Component {
                     ? <ErrorWrapper>Error Registering</ErrorWrapper>
                     : null
                 }
+                <GoogleLogin
+                    clientId={gId}
+                    buttonText="Login"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    uxMode={"popup"}
+                />
             </Container>
         );
     }
