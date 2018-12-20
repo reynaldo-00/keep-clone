@@ -1,13 +1,15 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 
-const generateToken = require('./generateToken');
+
+const generateToken = require('../auth/generateToken');
 const db = require('../database/dbConfig');
 
 const router = express.Router();
 
 router.post('/login', login);
 router.post('/register', register);
+router.get('/oauth/google', oauthGoogle);
 
 module.exports = router;
 
@@ -58,4 +60,8 @@ async function register(req, res) {
     } catch(err) {
         res.json(err)
     }
+}
+
+async function oauthGoogle(req, res) {
+
 }

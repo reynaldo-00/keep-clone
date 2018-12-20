@@ -1,5 +1,5 @@
-const notesRouter = require('../notes/notesRouter');
-const authRouter = require('../auth/authRouter');
+const notesRouter = require('../routes/notesRouter');
+const authRouter = require('../routes/authRouter');
 const protected = require('../auth/protected');
 
 module.exports = server => {
