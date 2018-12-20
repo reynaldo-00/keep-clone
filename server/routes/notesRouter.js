@@ -56,7 +56,24 @@ async function getNoteById(req, res) {
         res.status(400).json({error: "Error getting note or does not exist"});
         return;
     }
-    res.status(200).json(note);
+
+    const tagIds = await db('note_tags').where('note_id', '=', note.id);
+
+    if (!tagIds.length) {
+        res.status(200).json(note);
+        return;
+    }
+        
+    const tagPromises = tagIds.map(async id => {
+        const tag = await db('tags').where('id', '=', id.tag_id).first();
+        return tag.name;
+    });
+        
+    const tags = await Promise.all(tagPromises);
+    
+
+
+    res.status(200).json({...note, tags});
 }
 
 async function createNote(req, res) {
