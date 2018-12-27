@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
-import { GoogleLogin } from 'react-google-login';
+// import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
 
 import { authRegister } from '../../actions'
 import Background from '../Background';
@@ -9,7 +10,7 @@ import Navigation from '../Home/Navigation';
 
 import requireNotAuth from './requireNotAuth';
 
-const gId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
+// const gId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
 class Register extends Component {
     constructor(props) {
@@ -34,6 +35,14 @@ class Register extends Component {
 
     responseGoogle = (response) => {
         console.log(response);
+        if (response.Zi && response.Zi.id_token) {
+            const config = {
+                headers: {
+                  authorization: response.Zi.id_token,
+                }
+            }
+            axios.get('http://localhost:9001/auth/oauth/google', config);
+        }
     }
 
     render() {
@@ -71,13 +80,13 @@ class Register extends Component {
                     ? <ErrorWrapper>Error Registering</ErrorWrapper>
                     : null
                 }
-                <GoogleLogin
+                {/* <GoogleLogin
                     clientId={gId}
                     buttonText="Login"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
                     uxMode={"popup"}
-                />
+                /> */}
             </Container>
         );
     }
