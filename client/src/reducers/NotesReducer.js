@@ -27,7 +27,10 @@ import {
   
   const initialState = {
     notes: [],
-    activeNote: {},
+    activeNote: {
+      title: '',
+      textBody: ''
+    },
     loading: false,
     searchValue: '',
     sortMode: 'default',

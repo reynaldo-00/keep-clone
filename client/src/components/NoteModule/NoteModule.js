@@ -37,8 +37,22 @@ class NoteModule extends Component {
                     this.props.history.push('/app');
                 }}>
                     <CloseIcon onClick={e => {e.preventDefault(); this.props.history.push('/app');}}><i className="fas fa-times"></i></CloseIcon>
-                    <NoteModuleInput type="text" name="title" value={this.props.activeNote.title} onChange={this.props.activeNoteHandler}/>
-                    <NoteModuleTextArea type="text" name="textBody" value={this.props.activeNote.textBody} onChange={this.props.activeNoteHandler}/>
+                    
+                    <NoteModuleInput 
+                        type="text" 
+                        name="title" 
+                        value={this.props.activeNote.title} 
+                        onChange={this.props.activeNoteHandler}
+                    />
+                    
+                    <NoteModuleTextArea 
+                        type="text" 
+                        name="textBody" 
+                        value={this.props.activeNote.textBody} 
+                        onChange={this.props.activeNoteHandler}
+                    />
+                    
+                    
                     <ButtonsContainer display="true">
                         <StyledButton type="button" onClick={e => {
                             e.preventDefault();

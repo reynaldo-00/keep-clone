@@ -7,7 +7,7 @@ const NoteTags = ({tags}) => {
             {
                 tags && tags.length && tags.map((tag, i) => {
                     return (
-                        <TagContainer>
+                        <TagContainer key={i}>
                             {tag}
                         </TagContainer>
                     );
