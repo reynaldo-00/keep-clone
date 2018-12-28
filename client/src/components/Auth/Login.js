@@ -33,46 +33,48 @@ class Login extends Component {
     
     render() {
         return (
-            <Container 
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    this.props.authLogin({...this.state})
-                }}>
+            <>
                 <Background/>
-                <Navigation {...this.props}/>
-                
-                {
-                    this.props.loading ? <Loading/> : null
-                }
+                <Container 
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        this.props.authLogin({...this.state})
+                    }}>
+                    <Navigation {...this.props}/>
+                    
+                    {
+                        this.props.loading ? <Loading/> : null
+                    }
 
-                <StyledLabel htmlFor="username">Username</StyledLabel>
-                <StyledInput 
-                    type="text" 
-                    name="username" 
-                    id="username"
-                    value={this.state.username}
-                    onChange={this.changeHandler}
-                    placeholder="Username"
-                />
+                    <StyledLabel htmlFor="username">Username</StyledLabel>
+                    <StyledInput 
+                        type="text" 
+                        name="username" 
+                        id="username"
+                        value={this.state.username}
+                        onChange={this.changeHandler}
+                        placeholder="Username"
+                    />
 
-                <StyledLabel htmlFor="password">Password</StyledLabel>
-                <StyledInput 
-                    type="text" 
-                    name="password" 
-                    id="password"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    placeholder="Password"
-                />
-                
-                <StyledButton type="submit">Login</StyledButton>
-                <Register to="/register">Register</Register>
-                {
-                    this.props.error !== null
-                    ? <ErrorWrapper>Error Authenticating</ErrorWrapper>
-                    : null
-                }
-            </Container>
+                    <StyledLabel htmlFor="password">Password</StyledLabel>
+                    <StyledInput 
+                        type="text" 
+                        name="password" 
+                        id="password"
+                        value={this.state.password}
+                        onChange={this.changeHandler}
+                        placeholder="Password"
+                    />
+                    
+                    <StyledButton type="submit">Login</StyledButton>
+                    <Register to="/register">Register</Register>
+                    {
+                        this.props.error !== null
+                        ? <ErrorWrapper>Error Authenticating</ErrorWrapper>
+                        : null
+                    }
+                </Container>
+            </>
         );
     }
 }
@@ -125,7 +127,8 @@ const StyledLabel = styled.label`
 `;
 
 const Container = styled.form`
-    position: absolute;
+    position: fixed;
+    z-index: 99;
     left: 50%;
     margin-left: -150px;
     margin-top: 150px;

@@ -7,21 +7,23 @@ import Navigation from './Navigation';
 class Home extends Component {
     render() {
         return (
-            <Container>
+            <>
                 <Background/>
-                <Navigation {...this.props} />
-                <Content>
-                    <h1>Keep</h1>
-                    <p>Like google keep but with less features</p>
-                    <button 
-                        type="button"
-                        onClick={e => {
-                            e.preventDefault();
-                            this.props.history.push('/register');
-                        }}
-                    >Signup Now</button>
-                </Content>
-            </Container>
+                <Container>
+                    <Navigation {...this.props} />
+                    <Content>
+                        <h1>Keep</h1>
+                        <p>Like google keep but with less features</p>
+                        <button 
+                            type="button"
+                            onClick={e => {
+                                e.preventDefault();
+                                this.props.history.push('/register');
+                            }}
+                            >Signup Now</button>
+                    </Content>
+                </Container>
+            </>
         );
     }
 }
@@ -29,11 +31,12 @@ class Home extends Component {
 export default Home;
 
 const Content = styled.div`
+    position: fixed;
+    top: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 300px;
-    margin-top: -150px;
     h1 {
         color: rgba(0,0,0,0.54);
         font-size: 50px;
@@ -60,7 +63,6 @@ const Content = styled.div`
 
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

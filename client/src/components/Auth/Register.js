@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import styled from 'styled-components';
-// import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
 
 import { authRegister } from '../../actions'
@@ -10,7 +9,6 @@ import Navigation from '../Home/Navigation';
 
 import requireNotAuth from './requireNotAuth';
 
-// const gId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
 class Register extends Component {
     constructor(props) {
@@ -47,47 +45,42 @@ class Register extends Component {
 
     render() {
         return (
-            <Container
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    this.props.authRegister({...this.state})
-                }}>
+            <>
                 <Background/>
-                <Navigation {...this.props} />
-                <StyledLabel htmlFor="username">Username</StyledLabel>
-                 <StyledInput 
-                    type="text" 
-                    name="username" 
-                    id="username"
-                    value={this.state.username}
-                    onChange={this.changeHandler}
-                    placeholder="Username"
-                />
+                <Container
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        this.props.authRegister({...this.state})
+                    }}>
+                    <Navigation {...this.props} />
+                    <StyledLabel htmlFor="username">Username</StyledLabel>
+                    <StyledInput 
+                        type="text" 
+                        name="username" 
+                        id="username"
+                        value={this.state.username}
+                        onChange={this.changeHandler}
+                        placeholder="Username"
+                    />
 
-                <StyledLabel htmlFor="password">Password</StyledLabel>
-                <StyledInput 
-                    type="text" 
-                    name="password" 
-                    id="password"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    placeholder="Password"
-                />
-                
-                <StyledButton type="submit">Submit</StyledButton>
-                {
-                    this.props.error !== null
-                    ? <ErrorWrapper>Error Registering</ErrorWrapper>
-                    : null
-                }
-                {/* <GoogleLogin
-                    clientId={gId}
-                    buttonText="Login"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                    uxMode={"popup"}
-                /> */}
-            </Container>
+                    <StyledLabel htmlFor="password">Password</StyledLabel>
+                    <StyledInput 
+                        type="text" 
+                        name="password" 
+                        id="password"
+                        value={this.state.password}
+                        onChange={this.changeHandler}
+                        placeholder="Password"
+                    />
+                    
+                    <StyledButton type="submit">Submit</StyledButton>
+                    {
+                        this.props.error !== null
+                        ? <ErrorWrapper>Error Registering</ErrorWrapper>
+                        : null
+                    }
+                </Container>
+            </>
         );
     }
 }
