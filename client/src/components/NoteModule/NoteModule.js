@@ -62,7 +62,11 @@ class NoteModule extends Component {
                         >Delete</StyledButton>
                         <StyledButton type="submit" active="true">Save</StyledButton>
                     </ButtonsContainer>
-                    <TagEdit tags={this.props.activeNote.tags}/>
+                    <TagEdit 
+                        tags={this.props.activeNote.tags}
+                        addTag={this.props.addTag}
+                        deleteTag={this.props.deleteTag}
+                    />
                 </NoteModuleForm>
     
                 {

@@ -147,13 +147,17 @@ import {
         }
       }
 
-      case EDIT_DELETE_TAG : return {
-        ...state, 
-        activeNote: {
-          ...state.activeNote,
-          tags: [...state.activeNote.tags.splice(action.payload, 1)]
+      case EDIT_DELETE_TAG : 
+        const newArr = [...state.activeNote.tags];
+        newArr.splice(action.payload, 1);
+        
+        return {
+          ...state, 
+          activeNote: {
+            ...state.activeNote,
+            tags: [...newArr]
+          }
         }
-      }
       default: return {...state};
     }
   }

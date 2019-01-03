@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components'
 
-const TagEdit = ({tags}) => {
+const TagEdit = ({tags, addTag, deleteTag}) => {
     return (
         <TagContainer>
         {
             tags && tags.map((tag, index) => {
                 return (
-                    <TagItem key={index}>
+                    <TagItem key={index} onClick={e => deleteTag(index)}>
                         {tag}
                     </TagItem>
                 );
