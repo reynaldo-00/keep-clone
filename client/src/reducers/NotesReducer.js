@@ -21,7 +21,9 @@ import {
     DELETE_NOTE,
     DELETE_NOTE_FAILURE,
     DELETE_NOTE_SUCCESS,
-    SELECT_MODE_TOGGLE
+    SELECT_MODE_TOGGLE,
+    EDIT_ADD_TAG,
+    EDIT_DELETE_TAG
   } from '../actions'
   
   
@@ -136,7 +138,22 @@ import {
         }
 
       case SELECT_MODE_TOGGLE : return {...state, selectMode: action.payload}
-  
+        
+      case EDIT_ADD_TAG : return {
+        ...state, 
+        activeNote: {
+          ...state.activeNote,
+          tags: [...state.activeNote.tags, action.payload]
+        }
+      }
+
+      case EDIT_DELETE_TAG : return {
+        ...state, 
+        activeNote: {
+          ...state.activeNote,
+          tags: [...state.activeNote.tags.splice(action.payload, 1)]
+        }
+      }
       default: return {...state};
     }
   }

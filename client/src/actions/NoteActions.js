@@ -29,6 +29,9 @@ export const DELETE_NOTE = 'delete_note';
 export const DELETE_NOTE_SUCCESS = 'delete_note_success';
 export const DELETE_NOTE_FAILURE = 'delete_note_failure';
 
+export const EDIT_ADD_TAG = 'edit_add_tag';
+export const EDIT_DELETE_TAG = 'edit_delete_tag';
+
 export const SELECT_MODE_TOGGLE = 'select_mode_toggle'
 
 // const url = 'http://localhost:3333';
@@ -163,4 +166,12 @@ export const deleteNote = (id) => async dispatch => {
 
 export const selectModeToggle = (value) => {
   return { type: SELECT_MODE_TOGGLE, payload: value };
+}
+
+export const addTag = (tag) => {
+  return { type: EDIT_ADD_TAG, payload: tag}
+}
+
+export const deleteTag = (index) => {
+  return { type: EDIT_DELETE_TAG, payload: index}
 }
