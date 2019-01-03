@@ -11,6 +11,7 @@ import {
 } from '../../styles';
 
 import DeleteConfirm from './DeleteConfirm';
+import TagEdit from './TagEdit';
 
 class NoteModule extends Component {
     constructor(props) {
@@ -61,6 +62,7 @@ class NoteModule extends Component {
                         >Delete</StyledButton>
                         <StyledButton type="submit" active="true">Save</StyledButton>
                     </ButtonsContainer>
+                    <TagEdit tags={this.props.activeNote.tags}/>
                 </NoteModuleForm>
     
                 {

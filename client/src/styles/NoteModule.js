@@ -54,7 +54,7 @@ export const NoteModuleForm = styled.form`
     border-radius: 8px;
     color: rgb(32, 33, 36);
     width: 600px;
-    height: 222px;
+    height: 292px;
     margin: 132px auto 16px auto;
     position: relative;
     background-color: white;

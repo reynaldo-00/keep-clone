@@ -24,17 +24,16 @@ const Container = styled.div`
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 0px 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 `
 
 const TagContainer = styled.div`
-    font-weight: 16px;
-    height: 25px;
+    font-size: 12px;
+    font-weight: 600;
     border: 1px solid rgba(0,0,0,0.54);
     border-radius: 8px;
     text-align: center;
-    line-height: 25px;
-    padding: 0px 5px;
+    padding: 5px;
+    margin: 5px;
 `
