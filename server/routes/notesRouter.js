@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('../database/dbConfig');
 const router = express.Router();
+const helpers = require('../database/helpers')
 
 router.get('/', (req, res) => {
     res.status(200).json({aliveAt: '/notes'})
@@ -16,24 +17,13 @@ router.delete('/delete/:id', deleteNote);
 module.exports = router;
 
 async function getAllNotes(req, res) {
-    // res.status(200).json({aliveAt: '/note/get/all'})
-    const {id, username, roles} = req.decodedToken;
+    const {id} = req.decodedToken;
 
-    const notes = await db('notes')
-        .where('user_id', '=', id);
-    
-    console.log('notes', notes.length);
+    const notes = await helpers.getNotes(id)
 
     const noteTagsPromises = notes.map(async note => {
-        const tagIds = await db('note_tags').where('note_id', '=', note.id);
-        if (!tagIds.length) return note;
         
-        const tagPromises = tagIds.map(async id => {
-            const tag = await db('tags').where('id', '=', id.tag_id).first();
-            return tag.name;
-        });
-        
-        const tags = await Promise.all(tagPromises);
+        const tags = await helpers.getTags(note.id)
         
         return {...note, tags};
     })

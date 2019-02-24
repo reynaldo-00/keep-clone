@@ -21,13 +21,13 @@ const createNote = note => {
 }
 
 const editNote = (noteId, userId, data) => {
-    return await db('notes')
+    return db('notes')
         .whereIn(['id', 'user_id'], [[noteId, userId]])
         .update(data);
 }
 
 const deleteNote = (noteId, userId) => {
-    return b('notes')
+    return db('notes')
         .whereIn(['id', 'user_id'], [[noteId, userId]])
         .del();
 }
