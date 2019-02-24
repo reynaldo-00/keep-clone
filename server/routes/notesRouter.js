@@ -36,32 +36,14 @@ async function getNoteById(req, res) {
     const id = req.params.id;
     const userId = req.decodedToken.id;
 
-    // const note = await db('notes').where('id' , '=', id).first();
-
-    const note = await db('notes')
-        .whereIn(['id', 'user_id'], [[id, userId]])
-        .first();
+    const note = await helpers.getNoteById(id, userId)
     
     if (!note) {
         res.status(400).json({error: "Error getting note or does not exist"});
         return;
     }
 
-    const tagIds = await db('note_tags').where('note_id', '=', note.id);
-
-    if (!tagIds.length) {
-        res.status(200).json(note);
-        return;
-    }
-        
-    const tagPromises = tagIds.map(async id => {
-        const tag = await db('tags').where('id', '=', id.tag_id).first();
-        return tag.name;
-    });
-        
-    const tags = await Promise.all(tagPromises);
-    
-
+    const tags = await helpers.getTags(note.id, userId)
 
     res.status(200).json({...note, tags});
 }
