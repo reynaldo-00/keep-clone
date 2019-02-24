@@ -1,7 +1,6 @@
 const express = require('express');
-const db = require('../database/dbConfig');
-const router = express.Router();
 const helpers = require('../database/helpers')
+const router = express.Router();
 
 router.get('/', (req, res) => {
     res.status(200).json({aliveAt: '/notes'})
@@ -57,9 +56,8 @@ async function createNote(req, res) {
         res.status(422).json({error: "Note Title and Note TextBody is required"});
         return;
     }
-
-    const noteId = await db('notes').returning('id').insert(newNote);
-    console.log(noteId);
+    
+    const noteId = await helpers.createNote(newNote)
 
     res.status(201).json({success: true, noteId})
 }
@@ -74,13 +72,10 @@ async function editNote(req, res) {
         return;
     }
 
-    const updatedNote = await db('notes')
-        .whereIn(['id', 'user_id'], [[id, userId]])
-        .update({...newData});
+    const updatedNote = await helpers.editNote(id, userId, newData)
     
-    console.log(updatedNote);
     if (updatedNote > 0) {
-        const note = await db('notes').where('id', '=', id).first();
+        const note = await helpers.getNoteById(id)
         res.status(201).json(note);
         return
     } else {
@@ -93,10 +88,6 @@ async function deleteNote(req, res) {
     const id = req.params.id;
     const userId = req.decodedToken.id;
 
-    
-    await db('notes')
-        .whereIn(['id', 'user_id'], [[id, userId]])
-        .del();
-
+    helpers.deleteNote(id, userId)
     res.status(201).json({success: true});
 }
